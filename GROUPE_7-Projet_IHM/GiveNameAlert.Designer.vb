@@ -26,7 +26,7 @@ Partial Class GiveNameAlert
         Me.lblAlertGiveName = New System.Windows.Forms.Label()
         Me.btnCreateDetail = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.detailNameTxtBox = New System.Windows.Forms.TextBox()
+        Me.DetailComboBox = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'lblAlertGiveName
@@ -36,9 +36,9 @@ Partial Class GiveNameAlert
         Me.lblAlertGiveName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(77, Byte), Integer))
         Me.lblAlertGiveName.Location = New System.Drawing.Point(24, 18)
         Me.lblAlertGiveName.Name = "lblAlertGiveName"
-        Me.lblAlertGiveName.Size = New System.Drawing.Size(250, 26)
+        Me.lblAlertGiveName.Size = New System.Drawing.Size(168, 26)
         Me.lblAlertGiveName.TabIndex = 1
-        Me.lblAlertGiveName.Text = "Donner un nom au détail"
+        Me.lblAlertGiveName.Text = "Choisir un détail"
         '
         'btnCreateDetail
         '
@@ -72,12 +72,15 @@ Partial Class GiveNameAlert
         Me.btnCancel.Text = "Annuler"
         Me.btnCancel.UseVisualStyleBackColor = False
         '
-        'detailNameTxtBox
+        'DetailComboBox
         '
-        Me.detailNameTxtBox.Location = New System.Drawing.Point(24, 61)
-        Me.detailNameTxtBox.Name = "detailNameTxtBox"
-        Me.detailNameTxtBox.Size = New System.Drawing.Size(446, 23)
-        Me.detailNameTxtBox.TabIndex = 8
+        Me.DetailComboBox.FormattingEnabled = True
+        Me.DetailComboBox.Items.AddRange(New Object() {"Oeuil 1", "Oeuil 2", "Bord du visage gauche", "Bord du visage droite", "Bas du nez", "Bord gauche du nez", "Bord droit du nez", "Bas du menton", "Haut des lèvres", "Bas des lèvres", "Bord gauche des lèvres", "Bord droit des lèvres"})
+        Me.DetailComboBox.Location = New System.Drawing.Point(24, 66)
+        Me.DetailComboBox.Name = "DetailComboBox"
+        Me.DetailComboBox.Size = New System.Drawing.Size(447, 23)
+        Me.DetailComboBox.TabIndex = 9
+        Me.DetailComboBox.Text = "Veuillez choisir un détail"
         '
         'GiveNameAlert
         '
@@ -85,7 +88,7 @@ Partial Class GiveNameAlert
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(482, 160)
-        Me.Controls.Add(Me.detailNameTxtBox)
+        Me.Controls.Add(Me.DetailComboBox)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnCreateDetail)
         Me.Controls.Add(Me.lblAlertGiveName)
@@ -102,5 +105,5 @@ Partial Class GiveNameAlert
     Friend WithEvents lblAlertGiveName As Label
     Friend WithEvents btnCreateDetail As Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents detailNameTxtBox As TextBox
+    Friend WithEvents DetailComboBox As ComboBox
 End Class

@@ -20,6 +20,11 @@
     Dim mousex As Integer
     Dim mousey As Integer
 
+    'Liste des points que l'on exportera
+    Dim Annotations(9) As String
+    Dim AnnotationsAliases(9) As String 'Aliases nous permettra de savoir à quel rang appartient tel ou tel point
+    'Il est vraiment horrible le système de liste de VB...
+
     Private Sub addNoteButton_Click(sender As Object, e As EventArgs) Handles addNoteButton.Click
         GiveNameAlert.Show()
     End Sub
@@ -45,6 +50,7 @@
 
         'On a joute le détail du point dans la liste
         DetailsListBox.Items.Add(Name)
+        Dim AnnotationDetail(40, 5) As String
     End Function
 
     Private Sub pb_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)

@@ -35,10 +35,10 @@
     End Sub
 
     Private Sub btnAlertExistingFileReplace_Click(sender As Object, e As EventArgs) Handles btnCreateDetail.Click
-        If (String.IsNullOrEmpty(detailNameTxtBox.Text)) Then
+        If (String.IsNullOrEmpty(DetailComboBox.SelectedItem)) Then
             MsgBox("Veuillez donner un nom")
         Else
-            Screen2.addNote(detailNameTxtBox.Text)
+            Screen2.addNote(DetailComboBox.SelectedIndex)
             Me.Dispose()
         End If
 
