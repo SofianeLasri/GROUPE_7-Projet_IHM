@@ -25,7 +25,7 @@
         With OpenFileDialog1
             .CheckFileExists = True
             .ShowReadOnly = False
-            .Filter = "All Files|.|Bitmap Files ()|*.bmp;*.gif;*.jpg;*.png"
+            .Filter = "Fichiers images|.|Bitmap Files ()|*.bmp;*.gif;*.jpg;*.png"
             .FilterIndex = 2
 
             '
