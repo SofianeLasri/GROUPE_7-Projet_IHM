@@ -9,7 +9,7 @@
     'Permet d'éviter que l'utilisateur ferme sans faire exprès, mais également à fermer la form1 qui reste active vu qu'elle n'est que cachée
     Private Sub Screen2_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If MessageBox.Show("Êtes-vous sûr de vouloir quitter?", "Fermer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-            Screen1.Dispose()
+            formMainScreen.Dispose()
         Else
             e.Cancel = True
         End If
