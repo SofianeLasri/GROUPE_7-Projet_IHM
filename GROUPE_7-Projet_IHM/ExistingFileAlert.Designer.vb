@@ -36,9 +36,9 @@ Partial Class ExistingFileAlert
         Me.lblAlertExistingFileTitle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(77, Byte), Integer), CType(CType(77, Byte), Integer), CType(CType(77, Byte), Integer))
         Me.lblAlertExistingFileTitle.Location = New System.Drawing.Point(24, 18)
         Me.lblAlertExistingFileTitle.Name = "lblAlertExistingFileTitle"
-        Me.lblAlertExistingFileTitle.Size = New System.Drawing.Size(213, 26)
+        Me.lblAlertExistingFileTitle.Size = New System.Drawing.Size(205, 26)
         Me.lblAlertExistingFileTitle.TabIndex = 1
-        Me.lblAlertExistingFileTitle.Text = "Image déjà existante"
+        Me.lblAlertExistingFileTitle.Text = "Fichier déjà existant"
         '
         'lblAlertExistingFileDescription
         '
@@ -49,7 +49,7 @@ Partial Class ExistingFileAlert
         Me.lblAlertExistingFileDescription.Name = "lblAlertExistingFileDescription"
         Me.lblAlertExistingFileDescription.Size = New System.Drawing.Size(416, 52)
         Me.lblAlertExistingFileDescription.TabIndex = 2
-        Me.lblAlertExistingFileDescription.Text = "L'image que vous essayer d'importer existe déjà. Souhaitez-vous la remplacer?"
+        Me.lblAlertExistingFileDescription.Text = "Le fichier que vous essayer d'importer existe déjà. Souhaitez-vous le remplacer?"
         '
         'btnAlertExistingFileReplace
         '
@@ -80,10 +80,10 @@ Partial Class ExistingFileAlert
         Me.btnAlertExistingFileKeep.Name = "btnAlertExistingFileKeep"
         Me.btnAlertExistingFileKeep.Size = New System.Drawing.Size(228, 32)
         Me.btnAlertExistingFileKeep.TabIndex = 7
-        Me.btnAlertExistingFileKeep.Text = "Garder l'image existante"
+        Me.btnAlertExistingFileKeep.Text = "Garder le fichier existant"
         Me.btnAlertExistingFileKeep.UseVisualStyleBackColor = False
         '
-        'GiveANameToDetail
+        'ExistingFileAlert
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -96,7 +96,7 @@ Partial Class ExistingFileAlert
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Name = "GiveANameToDetail"
+        Me.Name = "ExistingFileAlert"
         Me.Text = "GiveANameToDetail"
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -131,6 +131,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une ressource localisée de type System.IO.UnmanagedMemoryStream semblable à System.IO.MemoryStream.
+        '''</summary>
+        Friend ReadOnly Property notice() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("notice", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.IO.UnmanagedMemoryStream semblable à System.IO.MemoryStream.
+        '''</summary>
+        Friend ReadOnly Property notif() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("notif", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une ressource localisée de type System.Byte[].
         '''</summary>
         Friend ReadOnly Property Roboto_Regular() As Byte()

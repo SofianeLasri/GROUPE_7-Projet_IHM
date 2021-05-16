@@ -5,6 +5,7 @@
         btnAlertExistingFileReplace.Font = useFont.LoadFont(Me.GetType.Assembly, "GROUPE_7_Projet_IHM.HelvNeue75_W1G.ttf", 12, FontStyle.Bold)
         lblAlertExistingFileTitle.Font = useFont.LoadFont(Me.GetType.Assembly, "GROUPE_7_Projet_IHM.Roboto-Regular.ttf", 16, FontStyle.Regular)
         lblAlertExistingFileDescription.Font = useFont.LoadFont(Me.GetType.Assembly, "GROUPE_7_Projet_IHM.Roboto-Regular.ttf", 12, FontStyle.Regular)
+        My.Computer.Audio.Play(My.Resources.notice, AudioPlayMode.Background)
     End Sub
 
     'Permet de bouger la fênetre vu qu'elle ne dispose pas de bordure
@@ -31,31 +32,46 @@
     'Permet de savoir quel fichier est à remplacer ou non
     Dim FileName As String
     Dim SourceFile As String
+
+    'Mode pour savoir quelle est la tâche à effectuer -> on appel cette forme dans 2 cas différents
+    Dim Mode As Integer '1 = remplace image de screen2, 2 = remplace juste le fichier
     Public Function setFileName(Name As String, File As String)
         FileName = Name
         SourceFile = File
     End Function
+    Public Function setMode(useMode As Integer)
+        Mode = useMode
+    End Function
+
 
     Private Sub btnAlertExistingFileKeep_Click(sender As Object, e As EventArgs) Handles btnAlertExistingFileKeep.Click
-        'On remplace simplement
-        Screen2.picSecondScreen1.Image = Image.FromFile("Resource\" + FileName)
+        If (Mode = 0) Then
+            'On remplace simplement
+            Screen2.picSecondScreen1.Image = Image.FromFile("Resource\" + FileName)
+            Screen2.picSecondScreen1.Tag = FileName
 
-        Screen2.Show()
-        formMainScreen.Hide()
+            Screen2.Show()
+            formMainScreen.Hide()
+        End If
         Me.Dispose()
 
     End Sub
 
     Private Sub btnAlertExistingFileReplace_Click(sender As Object, e As EventArgs) Handles btnAlertExistingFileReplace.Click
         'On supprime le fichier qui existe déjà
-        IO.File.Delete("Resource\" + FileName)
-        'Et on execute le code permettant de copier le fichier et de l'utiliser sur l'écran suivant
-        System.IO.File.Copy(SourceFile, "Resource\" + FileName)
-        Screen2.picSecondScreen1.Image = Image.FromFile("Resource\" + FileName)
+        If (Mode = 0) Then
+            IO.File.Delete("Resource\" + FileName)
+            'Et on execute le code permettant de copier le fichier et de l'utiliser sur l'écran suivant
+            System.IO.File.Copy(SourceFile, "Resource\" + FileName)
+            Screen2.picSecondScreen1.Image = Image.FromFile("Resource\" + FileName)
+            Screen2.picSecondScreen1.Tag = FileName
 
-        formMainScreen.Hide()
-        Screen2.Show()
+            formMainScreen.Hide()
+            Screen2.Show()
+        ElseIf (Mode = 1) Then
+            IO.File.Delete(SourceFile)
+            System.IO.File.Copy("Resource\" + FileName, SourceFile)
+        End If
         Me.Dispose()
-
     End Sub
 End Class

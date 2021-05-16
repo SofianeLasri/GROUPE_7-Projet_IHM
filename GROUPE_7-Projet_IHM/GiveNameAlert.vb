@@ -5,6 +5,7 @@
         btnCancel.Font = useFont.LoadFont(Me.GetType.Assembly, "GROUPE_7_Projet_IHM.HelvNeue75_W1G.ttf", 12, FontStyle.Bold)
         btnCreateDetail.Font = useFont.LoadFont(Me.GetType.Assembly, "GROUPE_7_Projet_IHM.HelvNeue75_W1G.ttf", 12, FontStyle.Bold)
         lblAlertGiveName.Font = useFont.LoadFont(Me.GetType.Assembly, "GROUPE_7_Projet_IHM.Roboto-Regular.ttf", 16, FontStyle.Regular)
+        My.Computer.Audio.Play(My.Resources.notice, AudioPlayMode.Background)
     End Sub
 
     'Permet de bouger la fênetre vu qu'elle ne dispose pas de bordure
@@ -36,6 +37,7 @@
 
     Private Sub btnAlertExistingFileReplace_Click(sender As Object, e As EventArgs) Handles btnCreateDetail.Click
         If (String.IsNullOrEmpty(DetailComboBox.SelectedItem)) Then
+            My.Computer.Audio.Play(My.Resources.notif, AudioPlayMode.Background)
             MsgBox("Veuillez donner un nom")
         Else
             Screen2.addNote(DetailComboBox.SelectedIndex)

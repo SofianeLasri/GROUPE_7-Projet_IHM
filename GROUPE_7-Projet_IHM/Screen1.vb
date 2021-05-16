@@ -25,7 +25,7 @@
         With OpenFileDialog1
             .CheckFileExists = True
             .ShowReadOnly = False
-            .Filter = "Fichiers images|.|Bitmap Files ()|*.bmp;*.gif;*.jpg;*.png"
+            .Filter = "Tous les fichiers|*|Fichiers images|*.bmp;*.gif;*.jpg;*.png"
             .FilterIndex = 2
 
             '
@@ -33,6 +33,7 @@
                 Dim FName() As String = OpenFileDialog1.FileName.Split("\")
 
                 If My.Computer.FileSystem.FileExists("Resource\" + FName(FName.Length - 1)) Then
+                    ExistingFileAlert.setMode(0)
                     ExistingFileAlert.setFileName(FName(FName.Length - 1), OpenFileDialog1.FileName)
                     ExistingFileAlert.Show()
                 Else

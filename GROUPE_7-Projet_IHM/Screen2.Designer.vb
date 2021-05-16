@@ -25,15 +25,18 @@ Partial Class Screen2
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Screen2))
         Me.picSecondScreen1 = New System.Windows.Forms.PictureBox()
         Me.leftSideBarPanel = New System.Windows.Forms.Panel()
+        Me.finishBtn = New System.Windows.Forms.Button()
+        Me.saveNotesLbl = New System.Windows.Forms.Label()
+        Me.saveNotesBtn = New System.Windows.Forms.Button()
+        Me.loadNotesLbl = New System.Windows.Forms.Label()
+        Me.loadNotesBtn = New System.Windows.Forms.Button()
         Me.DetailsListBox = New System.Windows.Forms.ListBox()
         Me.LeftSidebarDetailsLabel = New System.Windows.Forms.Label()
         Me.addNoteLabel = New System.Windows.Forms.Label()
         Me.addNoteButton = New System.Windows.Forms.Button()
         Me.LeftSidebarTitleLabel = New System.Windows.Forms.Label()
-        Me.refCrossPic = New System.Windows.Forms.PictureBox()
         CType(Me.picSecondScreen1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.leftSideBarPanel.SuspendLayout()
-        CType(Me.refCrossPic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'picSecondScreen1
@@ -41,7 +44,7 @@ Partial Class Screen2
         Me.picSecondScreen1.BackColor = System.Drawing.Color.Transparent
         Me.picSecondScreen1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.picSecondScreen1.Image = CType(resources.GetObject("picSecondScreen1.Image"), System.Drawing.Image)
-        Me.picSecondScreen1.Location = New System.Drawing.Point(384, 70)
+        Me.picSecondScreen1.Location = New System.Drawing.Point(494, 67)
         Me.picSecondScreen1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.picSecondScreen1.Name = "picSecondScreen1"
         Me.picSecondScreen1.Size = New System.Drawing.Size(457, 407)
@@ -51,6 +54,11 @@ Partial Class Screen2
         '
         'leftSideBarPanel
         '
+        Me.leftSideBarPanel.Controls.Add(Me.finishBtn)
+        Me.leftSideBarPanel.Controls.Add(Me.saveNotesLbl)
+        Me.leftSideBarPanel.Controls.Add(Me.saveNotesBtn)
+        Me.leftSideBarPanel.Controls.Add(Me.loadNotesLbl)
+        Me.leftSideBarPanel.Controls.Add(Me.loadNotesBtn)
         Me.leftSideBarPanel.Controls.Add(Me.DetailsListBox)
         Me.leftSideBarPanel.Controls.Add(Me.LeftSidebarDetailsLabel)
         Me.leftSideBarPanel.Controls.Add(Me.addNoteLabel)
@@ -61,21 +69,68 @@ Partial Class Screen2
         Me.leftSideBarPanel.Size = New System.Drawing.Size(301, 594)
         Me.leftSideBarPanel.TabIndex = 6
         '
+        'finishBtn
+        '
+        Me.finishBtn.Location = New System.Drawing.Point(200, 559)
+        Me.finishBtn.Name = "finishBtn"
+        Me.finishBtn.Size = New System.Drawing.Size(75, 23)
+        Me.finishBtn.TabIndex = 11
+        Me.finishBtn.Text = "Terminé"
+        Me.finishBtn.UseVisualStyleBackColor = True
+        '
+        'saveNotesLbl
+        '
+        Me.saveNotesLbl.AutoSize = True
+        Me.saveNotesLbl.Location = New System.Drawing.Point(64, 184)
+        Me.saveNotesLbl.Name = "saveNotesLbl"
+        Me.saveNotesLbl.Size = New System.Drawing.Size(155, 15)
+        Me.saveNotesLbl.TabIndex = 10
+        Me.saveNotesLbl.Text = "Sauvegarder les annotations"
+        '
+        'saveNotesBtn
+        '
+        Me.saveNotesBtn.BackgroundImage = CType(resources.GetObject("saveNotesBtn.BackgroundImage"), System.Drawing.Image)
+        Me.saveNotesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.saveNotesBtn.Location = New System.Drawing.Point(13, 169)
+        Me.saveNotesBtn.Name = "saveNotesBtn"
+        Me.saveNotesBtn.Size = New System.Drawing.Size(45, 45)
+        Me.saveNotesBtn.TabIndex = 9
+        Me.saveNotesBtn.UseVisualStyleBackColor = True
+        '
+        'loadNotesLbl
+        '
+        Me.loadNotesLbl.AutoSize = True
+        Me.loadNotesLbl.Location = New System.Drawing.Point(64, 133)
+        Me.loadNotesLbl.Name = "loadNotesLbl"
+        Me.loadNotesLbl.Size = New System.Drawing.Size(136, 15)
+        Me.loadNotesLbl.TabIndex = 8
+        Me.loadNotesLbl.Text = "Charger des annotations"
+        '
+        'loadNotesBtn
+        '
+        Me.loadNotesBtn.BackgroundImage = CType(resources.GetObject("loadNotesBtn.BackgroundImage"), System.Drawing.Image)
+        Me.loadNotesBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.loadNotesBtn.Location = New System.Drawing.Point(13, 118)
+        Me.loadNotesBtn.Name = "loadNotesBtn"
+        Me.loadNotesBtn.Size = New System.Drawing.Size(45, 45)
+        Me.loadNotesBtn.TabIndex = 7
+        Me.loadNotesBtn.UseVisualStyleBackColor = True
+        '
         'DetailsListBox
         '
         Me.DetailsListBox.BackColor = System.Drawing.SystemColors.Window
         Me.DetailsListBox.FormattingEnabled = True
         Me.DetailsListBox.ItemHeight = 15
-        Me.DetailsListBox.Location = New System.Drawing.Point(13, 188)
+        Me.DetailsListBox.Location = New System.Drawing.Point(13, 278)
         Me.DetailsListBox.Name = "DetailsListBox"
-        Me.DetailsListBox.Size = New System.Drawing.Size(120, 94)
+        Me.DetailsListBox.Size = New System.Drawing.Size(262, 274)
         Me.DetailsListBox.TabIndex = 4
         '
         'LeftSidebarDetailsLabel
         '
         Me.LeftSidebarDetailsLabel.AutoSize = True
         Me.LeftSidebarDetailsLabel.Font = New System.Drawing.Font("Raleway", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
-        Me.LeftSidebarDetailsLabel.Location = New System.Drawing.Point(12, 148)
+        Me.LeftSidebarDetailsLabel.Location = New System.Drawing.Point(12, 237)
         Me.LeftSidebarDetailsLabel.Name = "LeftSidebarDetailsLabel"
         Me.LeftSidebarDetailsLabel.Size = New System.Drawing.Size(276, 25)
         Me.LeftSidebarDetailsLabel.TabIndex = 3
@@ -84,7 +139,7 @@ Partial Class Screen2
         'addNoteLabel
         '
         Me.addNoteLabel.AutoSize = True
-        Me.addNoteLabel.Location = New System.Drawing.Point(64, 97)
+        Me.addNoteLabel.Location = New System.Drawing.Point(64, 82)
         Me.addNoteLabel.Name = "addNoteLabel"
         Me.addNoteLabel.Size = New System.Drawing.Size(130, 15)
         Me.addNoteLabel.TabIndex = 2
@@ -94,7 +149,7 @@ Partial Class Screen2
         '
         Me.addNoteButton.BackgroundImage = Global.GROUPE_7_Projet_IHM.My.Resources.Resources.add
         Me.addNoteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.addNoteButton.Location = New System.Drawing.Point(13, 82)
+        Me.addNoteButton.Location = New System.Drawing.Point(13, 67)
         Me.addNoteButton.Name = "addNoteButton"
         Me.addNoteButton.Size = New System.Drawing.Size(45, 45)
         Me.addNoteButton.TabIndex = 1
@@ -110,25 +165,12 @@ Partial Class Screen2
         Me.LeftSidebarTitleLabel.TabIndex = 0
         Me.LeftSidebarTitleLabel.Text = "Caractéristiques du visage"
         '
-        'refCrossPic
-        '
-        Me.refCrossPic.BackColor = System.Drawing.Color.Transparent
-        Me.refCrossPic.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.refCrossPic.Image = Global.GROUPE_7_Projet_IHM.My.Resources.Resources.close
-        Me.refCrossPic.Location = New System.Drawing.Point(1079, 16)
-        Me.refCrossPic.Name = "refCrossPic"
-        Me.refCrossPic.Size = New System.Drawing.Size(30, 30)
-        Me.refCrossPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.refCrossPic.TabIndex = 7
-        Me.refCrossPic.TabStop = False
-        '
         'Screen2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(1121, 594)
-        Me.Controls.Add(Me.refCrossPic)
         Me.Controls.Add(Me.leftSideBarPanel)
         Me.Controls.Add(Me.picSecondScreen1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -139,7 +181,6 @@ Partial Class Screen2
         CType(Me.picSecondScreen1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.leftSideBarPanel.ResumeLayout(False)
         Me.leftSideBarPanel.PerformLayout()
-        CType(Me.refCrossPic, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -149,7 +190,11 @@ Partial Class Screen2
     Friend WithEvents LeftSidebarTitleLabel As Label
     Friend WithEvents addNoteButton As Button
     Friend WithEvents addNoteLabel As Label
-    Friend WithEvents refCrossPic As PictureBox
     Friend WithEvents LeftSidebarDetailsLabel As Label
     Friend WithEvents DetailsListBox As ListBox
+    Friend WithEvents loadNotesLbl As Label
+    Friend WithEvents loadNotesBtn As Button
+    Friend WithEvents saveNotesLbl As Label
+    Friend WithEvents saveNotesBtn As Button
+    Friend WithEvents finishBtn As Button
 End Class
