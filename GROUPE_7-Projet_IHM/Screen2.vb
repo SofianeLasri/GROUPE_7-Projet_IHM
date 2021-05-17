@@ -80,7 +80,7 @@
 
             'On a joute le détail du point dans la liste
             DetailsListBox.Items.Add(AnnotationsAliases(id))
-            pb.Tag = DetailsListBox.Items.Count
+            pb.Tag = id
             Annotations(id, 0) = AnnotationsShortAliases(id)
             Annotations(id, 1) = picSecondScreen1.Location.X - 600 'x
             Annotations(id, 2) = picSecondScreen1.Location.Y - 270 'y
@@ -92,7 +92,7 @@
     End Function
 
     Private Sub pb_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-        DetailsListBox.SetSelected(sender.Tag - 1, True)
+        DetailsListBox.SetSelected(sender.Tag, True)
         drag = True
         mousex = Windows.Forms.Cursor.Position.X - sender.Left
         mousey = Windows.Forms.Cursor.Position.Y - sender.Top
@@ -105,8 +105,8 @@
     End Sub
     Private Sub pb_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         drag = False
-        Annotations(sender.Tag, 1) = picSecondScreen1.Location.X - sender.Location.X 'x
-        Annotations(sender.Tag, 2) = picSecondScreen1.Location.Y - sender.Location.Y 'y
+        Annotations(sender.Tag, 1) = sender.Left - picSecondScreen1.Location.X 'x
+        Annotations(sender.Tag, 2) = sender.Top - picSecondScreen1.Location.Y 'y
     End Sub
 
     Private Sub saveNotesBtn_Click(sender As Object, e As EventArgs) Handles saveNotesBtn.Click
@@ -176,6 +176,7 @@
 
                     Dim currentRow As String()
                     Dim index As Integer
+                    Dim index2 As Integer
                     index = 0
                     Dim indexCount As Integer
                     'On déclare un tableau temporaire
@@ -186,30 +187,52 @@
                         Try
                             currentRow = ImportedNotes.ReadFields()
                             Dim currentField As String
+                            'On est à l'initialisation du code
                             If (index = 0) Then
                                 indexCount = currentRow.Length
                                 'On redéclare le tableau en fonction de la taille de la ligne
                                 ReDim NewAnnotations(indexCount, 3)
-                            ElseIf (index <= indexCount) Then
-                                For Each currentField In currentRow
-                                    'On va regarder si le nom de la colonne correspond à un index connu
+                            End If
+                            'currentRow est une liste contenant les valeurs
+                            'La première ligne contient le nom des variables
+                            For Each currentField In currentRow
+                                If (index < indexCount) Then
+                                    'Donc on va regarder si le nom de la colonne correspond à un index connu
+                                    'Comme ça ont va associer les numéros d'index à ceux que l'on a déjà
+                                    index2 = 0
                                     For Each AnnotationsShortAlias In AnnotationsShortAliases
+                                        'Donc pour chaque alias, on va check si le nom de la colonne correspond partiellement à ce dernier (car on .x et .y)
                                         If (currentField.Contains(AnnotationsShortAlias.ToString)) Then
-                                            Annotations(AnnotationsShortAliases.IndexOf(AnnotationsShortAlias), 0) = AnnotationsShortAliases.IndexOf(AnnotationsShortAlias)
-                                            NewAnnotations(index - 1, 2) = AnnotationsShortAliases.IndexOf(AnnotationsShortAlias)
+                                            'MsgBox(currentField + " contient " + AnnotationsShortAlias)
+                                            Annotations(index2, 0) = AnnotationsShortAlias
+                                            'MsgBox(Annotations(index2, 0))
+
+                                            'NewAnnotations sert d'alias pour les vraies annotations. On stock les index corrigé dans la 3ème ligne
+                                            NewAnnotations(index, 2) = index2
                                         End If
+                                        index2 = index2 + 1
                                     Next
 
-                                    NewAnnotations(index - 1, 0) = currentField
-                                Next
-                            Else
-                                If currentField.Contains(".x") Then
-                                    Annotations(NewAnnotations(index - 1 - indexCount, 2), 1) = CInt(currentField)
-                                ElseIf currentField.Contains(".y") Then
-                                    Annotations(NewAnnotations(index - 1 - indexCount, 2), 2) = CInt(currentField)
+                                    'On note le nom de la colonne dans la liste NewAnnotations
+                                    NewAnnotations(index, 0) = currentField
+
+                                Else
+                                    'Ici on n'est plus sur la première ligne
+                                    'En théorie il n'y a que deux lignes
+
+                                    'On met la valeur de la colonne dans la ligne n°2
+                                    NewAnnotations(index - indexCount, 1) = currentField
+                                    'MsgBox("On est dans les donnée, je contient x/y: " + NewAnnotations(index - indexCount, 0) + " . Ma valeur est: " + currentField)
+
+                                    If NewAnnotations(index - indexCount, 0).Contains(".x") Then
+                                        Annotations(NewAnnotations(index - indexCount, 2), 1) = currentField
+                                    ElseIf NewAnnotations(index - indexCount, 0).Contains(".y") Then
+                                        Annotations(NewAnnotations(index - indexCount, 2), 2) = currentField
+                                    End If
+
                                 End If
-                            End If
-                            index = index + 1
+                                index = index + 1
+                            Next
                         Catch ex As Microsoft.VisualBasic.
                                         FileIO.MalformedLineException
                             MsgBox("Line " & ex.Message &
@@ -219,34 +242,38 @@
                 End Using
 
                 'On créé les points
-                For Each Annotation In Annotations
-                    MsgBox(Annotation)
+                For index3 As Integer = 0 To 11
+                    'MsgBox("Anotation " + index3.ToString)
 
-                    'Dim pb As New PictureBox
-                    'AddHandler pb.MouseDown, AddressOf pb_MouseDown
-                    'AddHandler pb.MouseMove, AddressOf pb_MouseMove
-                    'AddHandler pb.MouseUp, AddressOf pb_MouseUp
-                    'pb.Width = 30 'or whatever
-                    'pb.Height = 30
-                    ' pb.Top = picSecondScreen1.Location.X + AscW(Annotation(2)) 'or whatever
-                    'pb.Left = picSecondScreen1.Location.X + AscW(Annotation(1))
-                    'pb.Image = My.Resources.close
-                    'pb.BackColor = Color.Transparent
+                    Dim pb As New PictureBox
+                    AddHandler pb.MouseDown, AddressOf pb_MouseDown
+                    AddHandler pb.MouseMove, AddressOf pb_MouseMove
+                    AddHandler pb.MouseUp, AddressOf pb_MouseUp
+                    pb.Width = 30 'or whatever
+                    pb.Height = 30
+                    pb.Top = picSecondScreen1.Location.Y + (Annotations(index3, 2))
+                    pb.Left = picSecondScreen1.Location.X + (Annotations(index3, 1))
+                    pb.Image = My.Resources.close
+                    pb.BackColor = Color.Transparent
 
-                    'pb.Cursor = Cursors.Hand
-                    'pb.SizeMode = PictureBoxSizeMode.StretchImage
-                    'pb.Name = Name
+                    pb.Cursor = Cursors.Hand
+                    pb.SizeMode = PictureBoxSizeMode.StretchImage
+                    pb.Name = Name
 
-                    'Me.Controls.Add(pb)
-                    'pb.BringToFront()
+                    Me.Controls.Add(pb)
+                    pb.BringToFront()
 
                     'On a joute le détail du point dans la liste
-                    'DetailsListBox.Items.Add(AnnotationsAliases(Annotation(0)))
-                    'pb.Tag = DetailsListBox.Items.Count
+                    DetailsListBox.Items.Add(AnnotationsAliases(index3))
+                    pb.Tag = index3
                 Next
 
 
             End If
         End With
+    End Sub
+
+    Private Sub finishBtn_Click(sender As Object, e As EventArgs) Handles finishBtn.Click
+        MsgBox(picSecondScreen1.Tag)
     End Sub
 End Class

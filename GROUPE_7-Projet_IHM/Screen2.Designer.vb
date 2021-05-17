@@ -129,10 +129,10 @@ Partial Class Screen2
         'LeftSidebarDetailsLabel
         '
         Me.LeftSidebarDetailsLabel.AutoSize = True
-        Me.LeftSidebarDetailsLabel.Font = New System.Drawing.Font("Raleway", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.LeftSidebarDetailsLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
         Me.LeftSidebarDetailsLabel.Location = New System.Drawing.Point(12, 237)
         Me.LeftSidebarDetailsLabel.Name = "LeftSidebarDetailsLabel"
-        Me.LeftSidebarDetailsLabel.Size = New System.Drawing.Size(276, 25)
+        Me.LeftSidebarDetailsLabel.Size = New System.Drawing.Size(277, 25)
         Me.LeftSidebarDetailsLabel.TabIndex = 3
         Me.LeftSidebarDetailsLabel.Text = "Détails des caractéristiques"
         '
@@ -158,10 +158,10 @@ Partial Class Screen2
         'LeftSidebarTitleLabel
         '
         Me.LeftSidebarTitleLabel.AutoSize = True
-        Me.LeftSidebarTitleLabel.Font = New System.Drawing.Font("Raleway", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
+        Me.LeftSidebarTitleLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
         Me.LeftSidebarTitleLabel.Location = New System.Drawing.Point(12, 21)
         Me.LeftSidebarTitleLabel.Name = "LeftSidebarTitleLabel"
-        Me.LeftSidebarTitleLabel.Size = New System.Drawing.Size(263, 25)
+        Me.LeftSidebarTitleLabel.Size = New System.Drawing.Size(267, 25)
         Me.LeftSidebarTitleLabel.TabIndex = 0
         Me.LeftSidebarTitleLabel.Text = "Caractéristiques du visage"
         '

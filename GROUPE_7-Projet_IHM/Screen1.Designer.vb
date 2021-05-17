@@ -113,7 +113,7 @@ Partial Class formMainScreen
         '
         Me.imgTitle.BackColor = System.Drawing.Color.Transparent
         Me.imgTitle.Image = CType(resources.GetObject("imgTitle.Image"), System.Drawing.Image)
-        Me.imgTitle.Location = New System.Drawing.Point(286, 115)
+        Me.imgTitle.Location = New System.Drawing.Point(295, 113)
         Me.imgTitle.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.imgTitle.Name = "imgTitle"
         Me.imgTitle.Size = New System.Drawing.Size(512, 128)
@@ -126,7 +126,7 @@ Partial Class formMainScreen
         Me.pnlSendImage.Controls.Add(Me.lblCopyright)
         Me.pnlSendImage.Controls.Add(Me.lblSendImage)
         Me.pnlSendImage.Controls.Add(Me.btnMainScreen)
-        Me.pnlSendImage.Location = New System.Drawing.Point(384, 273)
+        Me.pnlSendImage.Location = New System.Drawing.Point(389, 292)
         Me.pnlSendImage.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlSendImage.Name = "pnlSendImage"
         Me.pnlSendImage.Size = New System.Drawing.Size(354, 152)
@@ -136,7 +136,7 @@ Partial Class formMainScreen
         '
         Me.lblCopyright.AutoSize = True
         Me.lblCopyright.BackColor = System.Drawing.Color.White
-        Me.lblCopyright.Location = New System.Drawing.Point(204, 134)
+        Me.lblCopyright.Location = New System.Drawing.Point(224, 137)
         Me.lblCopyright.Name = "lblCopyright"
         Me.lblCopyright.Size = New System.Drawing.Size(130, 15)
         Me.lblCopyright.TabIndex = 6
