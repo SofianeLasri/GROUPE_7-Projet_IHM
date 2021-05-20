@@ -1,13 +1,16 @@
-﻿Public Class Screen2
+﻿'Avouez le elle est chouette notre interface :D
+Public Class Screen2
     Private Sub Screen2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'On a pas fait dispose ou close car ça stop le programme
         formMainScreen.Hide()
+        'On remplace encore les polices d'écritures
         LeftSidebarTitleLabel.Font = useFont.LoadFont(Me.GetType.Assembly, "GROUPE_7_Projet_IHM.Roboto-Regular.ttf", 16, FontStyle.Regular)
         LeftSidebarDetailsLabel.Font = useFont.LoadFont(Me.GetType.Assembly, "GROUPE_7_Projet_IHM.Roboto-Regular.ttf", 16, FontStyle.Regular)
     End Sub
 
     'Permet d'éviter que l'utilisateur ferme sans faire exprès, mais également à fermer la form1 qui reste active vu qu'elle n'est que cachée
     Private Sub Screen2_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        'Pourquoi avoir mis un son? Et bien heum... Ça traînait sur mon pc et comme on en a mis sur d'autres pop-up... x)
         My.Computer.Audio.Play(My.Resources.notif, AudioPlayMode.Background)
         If MessageBox.Show("Êtes-vous sûr de vouloir quitter?", "Fermer", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
             formMainScreen.Dispose()
@@ -24,8 +27,8 @@
     'Liste des points que l'on exportera
     Public Annotations(11, 3) As String
     Public AnnotationsAliases = New String() {
-    "Oeil 1",
-    "Oeil 2",
+    "Oeil gauche",
+    "Oeil droit",
     "Bord du visage gauche",
     "Bord du visage droite",
     "Bas du nez",
@@ -40,7 +43,7 @@
     Dim AnnotationsShortAliases = New String() {
     "Y1",
     "Y2",
-    "BVD",
+    "BVG",
     "BVD",
     "BN",
     "BNG",
@@ -55,11 +58,16 @@
     'Il est vraiment horrible le système de liste de VB...
 
     Private Sub addNoteButton_Click(sender As Object, e As EventArgs) Handles addNoteButton.Click
+        'On ouvre la fenêtre permettant d'ajouter des points
+        'Elle aurait du être améliorer, mais nous manquions de temps
+        '(nan la vérité c'est qu'on avait le projet teuteuré à faire, et il est beaucoup plus sympa à faire :D)
         GiveNameAlert.Show()
     End Sub
 
     Public Function addNote(id As Integer)
+        'On vérifie que l'annotation n'a pas déjà été créée
         If (String.IsNullOrEmpty(Annotations(id, 0))) Then
+            'On créé le point
             Dim pb As New PictureBox
             AddHandler pb.MouseDown, AddressOf pb_MouseDown
             AddHandler pb.MouseMove, AddressOf pb_MouseMove
@@ -78,7 +86,7 @@
             Me.Controls.Add(pb)
             pb.BringToFront()
 
-            'On a joute le détail du point dans la liste
+            'On ajoute le détail du point dans la liste
             DetailsListBox.Items.Add(AnnotationsAliases(id))
             pb.Tag = id
             Annotations(id, 0) = AnnotationsShortAliases(id)
@@ -91,6 +99,7 @@
 
     End Function
 
+    'Ici j'ai simplement repris le code du déplaement des fenêtres pop-up
     Private Sub pb_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         DetailsListBox.SetSelected(sender.Tag, True)
         drag = True
@@ -109,16 +118,22 @@
         Annotations(sender.Tag, 2) = sender.Top - picSecondScreen1.Location.Y 'y
     End Sub
 
+    'Sacré bazar, mais ce n'est rien par rapport à celui d'après
     Private Sub saveNotesBtn_Click(sender As Object, e As EventArgs) Handles saveNotesBtn.Click
         Dim Line1 As String
+        'On écrit la première ligne qui n'est pas référencée dans la liste des annotations
         Line1 = "imagefile,"
         Dim Line2 As String
+        'On met le nom de l'image, le tag sert ici
         Line2 = picSecondScreen1.Tag + ","
+
+        'Technique pas ouf pour écrire le contenu d'une liste, mais on va dire que ça va avec le langage (:
         For i As Integer = 0 To 11
             Line1 = Line1 + Annotations(i, 0) + ".x," + Annotations(i, 0) + ".y,"
             Line2 = Line2 + Annotations(i, 1) + "," + Annotations(i, 2) + ","
         Next
 
+        'J'aurais du améliorer cet explorateur, mais [*passage sous un tunnel*].
         Dim exportPath As String
         Dim dialog As New FolderBrowserDialog()
         Dim file As System.IO.StreamWriter
@@ -129,8 +144,9 @@
             exportPath = dialog.SelectedPath
         End If
 
+        'On vérifie que le fichier n'existe pas déjà
         If My.Computer.FileSystem.FileExists("Resource\" + picSecondScreen1.Tag + ".csv") Then
-            'On supprime le fichier qui existe déjà
+            'Auquel cas on le supprime car on s'en fou
             IO.File.Delete("Resource\" + picSecondScreen1.Tag + ".csv")
         End If
 
@@ -139,8 +155,9 @@
         file.WriteLine(Line2)
         file.Close()
 
+        'Cette fois-ci on s'en fou pas, du coup on fait apparaître la boîte de dialogue qui agira en mode(1)
         If My.Computer.FileSystem.FileExists(exportPath + "\" + picSecondScreen1.Tag + ".csv") Then
-            ExistingFileAlert.setMode(1)
+            ExistingFileAlert.setMode(1) 'Ne fait que remplacer le fichier de destination
             ExistingFileAlert.setFileName(picSecondScreen1.Tag + ".csv", exportPath + "\" + picSecondScreen1.Tag + ".csv")
             ExistingFileAlert.Show()
         Else
@@ -153,8 +170,10 @@
 
     End Sub
 
+    'Alors ici... Voilà pourquoi je déteste absolument VB...
     Private Sub loadNotesBtn_Click(sender As Object, e As EventArgs) Handles loadNotesBtn.Click
         Dim OpenFileDialog1 As New OpenFileDialog
+        'On ouvre de nouveau l'explorateur Ouinedose
         With OpenFileDialog1
             .CheckFileExists = True
             .ShowReadOnly = False
@@ -163,17 +182,24 @@
 
             '
             If .ShowDialog = DialogResult.OK Then
+                'FName pour Filename, on récupère le nom en gros
                 Dim FName() As String = OpenFileDialog1.FileName.Split("\")
 
+                'blabla si ça existe paf pouf on supprime
                 If My.Computer.FileSystem.FileExists("Resource\" + FName(FName.Length - 1)) Then
                     IO.File.Delete("Resource\" + FName(FName.Length - 1))
                 End If
 
+                'On copie dans le dossier ressource
                 System.IO.File.Copy(OpenFileDialog1.FileName, "Resource\" + FName(FName.Length - 1))
                 Using ImportedNotes As New Microsoft.VisualBasic.FileIO.TextFieldParser("Resource\" + FName(FName.Length - 1))
+                    'La galère peut commencer
+
+                    'Ici on défini le délimiteur de colnne
                     ImportedNotes.TextFieldType = FileIO.FieldType.Delimited
                     ImportedNotes.SetDelimiters(",")
 
+                    'On initialise les variables qui nous servions après
                     Dim currentRow As String()
                     Dim index As Integer
                     Dim index2 As Integer
@@ -183,12 +209,18 @@
                     Dim NewAnnotations(12, 3) As String
 
                     'On lit chaque item
+                    'Je précise que la base de ce code a été trouvé sur la documentation officielle de Macrosoft
+                    'Soit nous sommes profondément nuls en recherche (et Dieu sait que c'est très probable), mais il semblerait que VB n'intègre pas de fonction
+                    'Permettant de concaténer un fichier csv comme le font très bien js, php, etc.
+
+                    'Donc, on fait une boucle
                     While Not ImportedNotes.EndOfData
-                        Try
+                        Try 'Qui essaie quelque chose
                             currentRow = ImportedNotes.ReadFields()
                             Dim currentField As String
-                            'On est à l'initialisation du code
+                            'On initialise le code
                             If (index = 0) Then
+                                'Ah oui au fait, on a utilisé pleins d'index car du coup il semblerait aussi que vb ne sait pas trop trop comment récupérer un index
                                 indexCount = currentRow.Length
                                 'On redéclare le tableau en fonction de la taille de la ligne
                                 ReDim NewAnnotations(indexCount, 3)
@@ -240,6 +272,7 @@
                         End Try
                     End While
                 End Using
+                'Enfin sorti de cet enfer! (mais on y retourne sur l'écran d'après mwahaha (mais là c'est sans moi)
 
                 'On créé les points
                 For index3 As Integer = 0 To 11
@@ -274,6 +307,12 @@
     End Sub
 
     Private Sub finishBtn_Click(sender As Object, e As EventArgs) Handles finishBtn.Click
-        MsgBox(picSecondScreen1.Tag)
+        'La magie du passage de variables, voilà pourquoi j'ai dit que les fonction du message d'avertissement étaient inutiles
+        Screen3.refImagePic.Image = Image.FromFile("Resource\" + picSecondScreen1.Tag)
+        Screen3.refImagePic.Tag = picSecondScreen1.Tag
+        Screen3.Annotations = Annotations
+        Screen3.Show()
+        Me.Dispose()
     End Sub
+
 End Class

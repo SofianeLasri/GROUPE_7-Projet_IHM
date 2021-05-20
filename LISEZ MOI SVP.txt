@@ -1,0 +1,20 @@
+Merci d'avoir ouvert ce fichier, nous avons quelques explications à vous donner à propos du code.
+
+Premièrement, vous l'avez peut-être remarqué, le logiciel est divisé en plusieurs Forms.  Nous avons fait le choix de faire
+1 écran par fonctionnalité (pour implémenter des boîtes de dialogues plus élégantes, mais également et surtout pour simplifier
+le code).
+
+Nous avons importé des assets (images, polices d'écritures, sons). C'est pour cela que nous avons fait le choix d'intégrer le
+projet entier au rendu (il est préférable d'importer le projet, plutôt que de simplement importer les fichiers du code.
+
+Certaines fonctions ne sont pas bien stables (VB crash de manière aléatoire, avec comme erreur "Invalid parameter"). Ces erreurs
+n'empêchent pas le logiciel de fonctionner en version compilée (sauf si vous avez la malchance de tomber sur une autre erreur liée
+à la création des coix. Il se peut qu'il vous dise que l'index est erroné, sauf que cela n'apparaît pas toujours...).
+
+Enfin, l'importation d'image est également buggée. À partir du second écran, après avoir importé l'image, il faut quitter le logiciel
+et le relancer avec la même image. Pourquoi? Et bien l'image, bien qu'importée et copiée dans le dossier de travail, n'est pas détectée
+si elle n'était pas présente avant le lancement du logiciel. Cela engeandrera une erreur fatale lors de l'ouverture du troisième 
+et dernier écran.
+
+Merci d'avoir lu ce fichier texte.
+TP2L - Sofiane LASRI-TRIENPONT & Lazar STEVANOVIC
